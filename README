@@ -1,7 +1,3 @@
-Cross Domain XHR: A drop-in replacement for XmlHttpRequest object.
+THIS IS ONLY A PORT OF ORIGINAL REPO INTO BOWER REGISTER
 
-Demo: http://random.hypervolume.com/crossxhr.html
-
-Wiki: http://code.google.com/p/crossxhr/wiki/CrossXhr
-
-Props: http://www.propster.me/tipjar/crossxhr_1
+https://github.com/borisreitman/CrossXHR

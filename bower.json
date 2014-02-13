@@ -1,0 +1,25 @@
+{
+  "name": "CrossXHR",
+  "main": "crossxhr.js",
+  "version": "0.0.1",
+  "homepage": "https://github.com/RobinQu/CrossXHR",
+  "authors": [
+    "RobinQu <robinqu@gmail.com>"
+  ],
+  "description": "Cross Domain Ajax using Flash transport",
+  "keywords": [
+    "flash",
+    "ajax",
+    "xhr",
+    "crossdomain"
+  ],
+  "license": "Artistic",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "app/bower_components",
+    "test",
+    "tests"
+  ]
+}
