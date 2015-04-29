@@ -10,7 +10,7 @@ var swfobject=function(){var Z="undefined",P="object",B="Shockwave Flash",h="Sho
 
 ////////////////
 
-  //var SWF_URL = "http://www.pliantcode.com/lib/crossxhr.swf"; // set if you want to hardcode path to crossxhr.swf
+  //var CROSSXHR_SWF_URL = "http://www.pliantcode.com/lib/crossxhr.swf"; // set if you want to hardcode path to crossxhr.swf
 
   FlashHttpRequest_objects = new Object();
   FlashHttpRequest_counter = 0;
@@ -91,7 +91,7 @@ var swfobject=function(){var Z="undefined",P="object",B="Shockwave Flash",h="Sho
     }
   }
 
-  if (typeof(SWF_URL) == 'undefined' || !SWF_URL) {
+  if (typeof(CROSSXHR_SWF_URL) == 'undefined' || !CROSSXHR_SWF_URL) {
     var prefix="";
     var tags = document.getElementsByTagName("script");
     for ( var i = 0; i < tags.length; i++ ) {
@@ -99,9 +99,9 @@ var swfobject=function(){var Z="undefined",P="object",B="Shockwave Flash",h="Sho
       if ( pos != -1 )
         prefix = tags[i].src.substring(0,pos);
     }
-    SWF_URL = prefix+'crossxhr.swf';
+    CROSSXHR_SWF_URL = prefix+'crossxhr.swf';
   }
 
   document.write('<span style="position:absolute;top:0;left:0"><span id="FlashHttpRequest_gateway"></span></span>');
-	swfobject.embedSWF(SWF_URL, "FlashHttpRequest_gateway", "1", "1", "9.0.0", "expressInstall.swf", {}, {wmode: 'transparent', allowscriptaccess:"always"} );
+	swfobject.embedSWF(CROSSXHR_SWF_URL, "FlashHttpRequest_gateway", "1", "1", "9.0.0", "expressInstall.swf", {}, {wmode: 'transparent', allowscriptaccess:"always"} );
 }
