@@ -102,6 +102,13 @@ var swfobject=function(){var Z="undefined",P="object",B="Shockwave Flash",h="Sho
     CROSSXHR_SWF_URL = prefix+'crossxhr.swf';
   }
 
-  document.write('<span style="position:absolute;top:0;left:0"><span id="FlashHttpRequest_gateway"></span></span>');
+  var elem = document.createElement('span');
+  elem.id = 'FlashHttpRequest_gateway';
+
+  var wrapperElem = document.createElement('span');
+  wrapperElem.style.cssText = 'position:absolute;top:0;left:0';
+  wrapperElem.appendChild(elem);
+
+  document.appendChild(wrapperElem);
 	swfobject.embedSWF(CROSSXHR_SWF_URL, "FlashHttpRequest_gateway", "1", "1", "9.0.0", "expressInstall.swf", {}, {wmode: 'transparent', allowscriptaccess:"always"} );
 }
