@@ -113,7 +113,6 @@ var swfobject=function(){var Z="undefined",P="object",B="Shockwave Flash",h="Sho
     }
     CROSSXHR_SWF_URL = prefix+'crossxhr.swf';
   }
-  console.log('init CROSSXHR: ' + CROSSXHR_SWF_URL);
 
   if (!document.getElementById('FlashHttpRequest_gateway')) {
     var elem = document.createElement('span');
@@ -124,7 +123,6 @@ var swfobject=function(){var Z="undefined",P="object",B="Shockwave Flash",h="Sho
     wrapperElem.appendChild(elem);
 
     function addEvent(element, eventName, fn) {
-      console.log('addEvent');
       if (element.addEventListener)
           element.addEventListener(eventName, fn, false);
       else if (element.attachEvent)
@@ -132,7 +130,6 @@ var swfobject=function(){var Z="undefined",P="object",B="Shockwave Flash",h="Sho
     }
 
     function loadFlashProxy() {
-      console.log('load crossxhr flash proxy');
       document.body.appendChild(wrapperElem);
       swfobject.embedSWF(CROSSXHR_SWF_URL, "FlashHttpRequest_gateway", "1", "1", "9.0.0", "expressInstall.swf", {}, {wmode: 'transparent', allowscriptaccess:"always"} );
     }
