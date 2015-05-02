@@ -1,6 +1,7 @@
 var FlashHttpRequest_ready;
 var FlashHttpRequest_objects;
 var FlashHttpRequest_counter;
+
 if (typeof(FlashHttpRequest_counter) == 'undefined'){
 /*	SWFObject v2.0 <http://code.google.com/p/swfobject/>
   	Copyright (c) 2007 Geoff Stearns, Michael Williams, and Bobby van der Sluis
@@ -91,6 +92,17 @@ var swfobject=function(){var Z="undefined",P="object",B="Shockwave Flash",h="Sho
     }
   }
 
+  function addEvent(elem, event, fn) {
+    if (elem.addEventListener) {
+      elem.addEventListener(event, fn, false);
+    } else {
+      elem.attachEvent("on" + event, function() {
+        // set the this pointer same as addEventListener when fn is called
+        return(fn.call(elem, window.event));
+      });
+    }
+  }
+
   if (typeof(CROSSXHR_SWF_URL) == 'undefined' || !CROSSXHR_SWF_URL) {
     var prefix="";
     var tags = document.getElementsByTagName("script");
@@ -101,6 +113,7 @@ var swfobject=function(){var Z="undefined",P="object",B="Shockwave Flash",h="Sho
     }
     CROSSXHR_SWF_URL = prefix+'crossxhr.swf';
   }
+  console.log('init CROSSXHR: ' + CROSSXHR_SWF_URL);
 
   if (!document.getElementById('FlashHttpRequest_gateway')) {
     var elem = document.createElement('span');
@@ -110,7 +123,26 @@ var swfobject=function(){var Z="undefined",P="object",B="Shockwave Flash",h="Sho
     wrapperElem.style.cssText = 'position:absolute;top:0;left:0';
     wrapperElem.appendChild(elem);
 
-    document.body.appendChild(wrapperElem);
-    swfobject.embedSWF(CROSSXHR_SWF_URL, "FlashHttpRequest_gateway", "1", "1", "9.0.0", "expressInstall.swf", {}, {wmode: 'transparent', allowscriptaccess:"always"} );
+    function addEvent(element, eventName, fn) {
+      console.log('addEvent');
+      if (element.addEventListener)
+          element.addEventListener(eventName, fn, false);
+      else if (element.attachEvent)
+          element.attachEvent('on' + eventName, fn);
+    }
+
+    function loadFlashProxy() {
+      console.log('load crossxhr flash proxy');
+      document.body.appendChild(wrapperElem);
+      swfobject.embedSWF(CROSSXHR_SWF_URL, "FlashHttpRequest_gateway", "1", "1", "9.0.0", "expressInstall.swf", {}, {wmode: 'transparent', allowscriptaccess:"always"} );
+    }
+
+    if (!document.body) {
+      addEvent(window, 'load', function() {
+        loadFlashProxy();
+      });
+    } else {
+      loadFlashProxy();
+    }
   }
 }
