@@ -114,32 +114,34 @@ var swfobject=function(){var Z="undefined",P="object",B="Shockwave Flash",h="Sho
     CROSSXHR_SWF_URL = prefix+'crossxhr.swf';
   }
 
-  if (!document.getElementById('FlashHttpRequest_gateway')) {
-    var elem = document.createElement('span');
-    elem.id = 'FlashHttpRequest_gateway';
-
-    var wrapperElem = document.createElement('span');
-    wrapperElem.style.cssText = 'position:absolute;top:0;left:0';
-    wrapperElem.appendChild(elem);
-
-    function addEvent(element, eventName, fn) {
-      if (element.addEventListener)
-          element.addEventListener(eventName, fn, false);
-      else if (element.attachEvent)
-          element.attachEvent('on' + eventName, fn);
+  function addEvent(element, eventName, fn) {
+    if (element.addEventListener) {
+      element.addEventListener(eventName, fn, false);
+    } else if (element.attachEvent) {
+      var ieEventName = eventName === 'DOMContentLoaded' ? 'onreadystatechange' : 'on' + eventName;
+      element.attachEvent(ieEventName, fn);
     }
+  }
 
-    function loadFlashProxy() {
+  function loadFlashProxy() {
+    if (!document.getElementById('FlashHttpRequest_gateway')) {
+      var elem = document.createElement('span');
+      elem.id = 'FlashHttpRequest_gateway';
+
+      var wrapperElem = document.createElement('span');
+      wrapperElem.style.cssText = 'position:absolute;top:0;left:0';
+      wrapperElem.appendChild(elem);
+
       document.body.appendChild(wrapperElem);
       swfobject.embedSWF(CROSSXHR_SWF_URL, "FlashHttpRequest_gateway", "1", "1", "9.0.0", "expressInstall.swf", {}, {wmode: 'transparent', allowscriptaccess:"always"} );
     }
+  }
 
-    if (!document.body) {
-      addEvent(window, 'load', function() {
-        loadFlashProxy();
-      });
-    } else {
+  if (!document.body) {
+    addEvent(window, 'DOMContentLoaded', function() {
       loadFlashProxy();
-    }
+    });
+  } else {
+    loadFlashProxy();
   }
 }
