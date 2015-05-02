@@ -102,13 +102,15 @@ var swfobject=function(){var Z="undefined",P="object",B="Shockwave Flash",h="Sho
     CROSSXHR_SWF_URL = prefix+'crossxhr.swf';
   }
 
-  var elem = document.createElement('span');
-  elem.id = 'FlashHttpRequest_gateway';
+  if (!document.getElementById('FlashHttpRequest_gateway')) {
+    var elem = document.createElement('span');
+    elem.id = 'FlashHttpRequest_gateway';
 
-  var wrapperElem = document.createElement('span');
-  wrapperElem.style.cssText = 'position:absolute;top:0;left:0';
-  wrapperElem.appendChild(elem);
+    var wrapperElem = document.createElement('span');
+    wrapperElem.style.cssText = 'position:absolute;top:0;left:0';
+    wrapperElem.appendChild(elem);
 
-  document.appendChild(wrapperElem);
-	swfobject.embedSWF(CROSSXHR_SWF_URL, "FlashHttpRequest_gateway", "1", "1", "9.0.0", "expressInstall.swf", {}, {wmode: 'transparent', allowscriptaccess:"always"} );
+    document.body.appendChild(wrapperElem);
+    swfobject.embedSWF(CROSSXHR_SWF_URL, "FlashHttpRequest_gateway", "1", "1", "9.0.0", "expressInstall.swf", {}, {wmode: 'transparent', allowscriptaccess:"always"} );
+  }
 }
